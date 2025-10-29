@@ -26,7 +26,7 @@ audio:
   
   # Separación vocal/instrumental
   separation:
-    model: "spleeter"  # spleeter, demucs, o replicate_api
+    model: "demucs"  # demucs (recomendado) o spleeter
     stems: 2  # 2 = vocals + accompaniment
   
   # Transcripción

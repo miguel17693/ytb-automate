@@ -151,7 +151,7 @@ class KaraokeProcessor:
             return None
     
     def _separate_audio(self, song: Dict, audio_path: str) -> tuple[Optional[str], Optional[str]]:
-        """Separate vocals and instrumental using Spleeter"""
+        """Separate vocals and instrumental using Demucs or Spleeter"""
         try:
             self.db.update_status(song['youtube_id'], SongStatus.SEPARATING)
             logger.info("Separating vocals and instrumental")
@@ -159,7 +159,47 @@ class KaraokeProcessor:
             output_dir = Path(self.paths['processed']) / song['youtube_id']
             output_dir.mkdir(parents=True, exist_ok=True)
             
-            if self.separation_model == 'spleeter':
+            if self.separation_model == 'demucs':
+                # Use Demucs command line
+                cmd = [
+                    'demucs',
+                    '--two-stems=vocals',  # Only vocals and accompaniment
+                    '-o', str(output_dir.parent),
+                    '--name', song['youtube_id'],
+                    audio_path
+                ]
+                
+                result = subprocess.run(cmd, capture_output=True, text=True, check=False)
+                
+                if result.returncode != 0:
+                    logger.error(f"Demucs error: {result.stderr}")
+                    raise RuntimeError("Demucs separation failed")
+                
+                # Demucs outputs to: output_dir/htdemucs/<youtube_id>/vocals.wav and no_vocals.wav
+                demucs_output_dir = output_dir.parent / 'htdemucs' / song['youtube_id']
+                
+                vocal_path = demucs_output_dir / 'vocals.wav'
+                instrumental_path = demucs_output_dir / 'no_vocals.wav'
+                
+                if not vocal_path.exists() or not instrumental_path.exists():
+                    raise FileNotFoundError("Demucs output files not found")
+                
+                # Move to our organized directory
+                final_vocal_path = output_dir / 'vocals.wav'
+                final_instrumental_path = output_dir / 'instrumental.wav'
+                
+                import shutil
+                shutil.copy2(vocal_path, final_vocal_path)
+                shutil.copy2(instrumental_path, final_instrumental_path)
+                
+                # Clean up demucs directory
+                if demucs_output_dir.parent.exists():
+                    shutil.rmtree(demucs_output_dir.parent)
+                
+                vocal_path = final_vocal_path
+                instrumental_path = final_instrumental_path
+            
+            elif self.separation_model == 'spleeter':
                 # Use Spleeter command line
                 cmd = [
                     'spleeter',

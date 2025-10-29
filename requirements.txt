@@ -10,13 +10,10 @@ google-auth-httplib2==0.1.1
 
 # Audio processing
 pydub==0.25.1
-spleeter==2.3.2
+demucs  # Separación de audio (más moderno que Spleeter)
 openai-whisper
 torch  # Para Whisper (CPU o GPU) - versión automática según tu sistema
 torchaudio
-
-# Alternative: Demucs (más moderno que Spleeter, descomenta si prefieres)
-# demucs==4.0.1
 
 # Video generation
 ffmpeg-python==0.2.0
