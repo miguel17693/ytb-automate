@@ -1,0 +1,81 @@
+# Configuración del Sistema de Karaoke Automatizado
+
+# YouTube Settings
+youtube:
+  region: ES  # España
+  max_results: 10  # Número máximo de tendencias a buscar
+  category_id: 10  # 10 = Música
+  api_key: ""  # Tu API key de YouTube Data API v3
+
+# Paths
+paths:
+  downloads: "./data/downloads"
+  processed: "./data/processed"
+  videos: "./data/videos"
+  backgrounds: "./data/backgrounds"
+  database: "./db/karaoke.db"
+
+# Audio Processing
+audio:
+  # Modificación sutil del instrumental
+  modification:
+    enabled: true
+    pitch_shift_semitones: 0.5  # Cambio sutil de pitch (+/- semitones)
+    tempo_change_percent: 2  # Cambio de tempo en % (1-5% recomendado)
+    apply_filter: true  # Aplicar filtro de audio sutil
+  
+  # Separación vocal/instrumental
+  separation:
+    model: "spleeter"  # spleeter, demucs, o replicate_api
+    stems: 2  # 2 = vocals + accompaniment
+  
+  # Transcripción
+  transcription:
+    model: "base"  # tiny, base, small, medium, large
+    language: "es"  # español
+
+# Video Generation
+video:
+  resolution: "1920x1080"  # Full HD
+  fps: 30
+  background_type: "gradient"  # gradient, image, video
+  
+  # Estilos de letras
+  lyrics:
+    font: "Arial"
+    font_size: 48
+    primary_color: "&H00FFFFFF"  # Blanco (formato ASS: &HAABBGGRR)
+    highlight_color: "&H0000FFFF"  # Amarillo brillante
+    border_size: 3
+    shadow_depth: 2
+    fade_in_ms: 200
+    fade_out_ms: 200
+  
+  # Visualizador de audio
+  visualizer:
+    type: "waveform"  # waveform, spectrum
+    color: "cyan"
+    position: "bottom"  # top, bottom, center
+    height: 200
+
+# Upload Settings
+upload:
+  auto_upload: false  # Cambiar a true para subida automática
+  title_template: "{song_title} - Karaoke (Letra)"
+  description_template: |
+    🎤 Karaoke de {song_title} - {artist}
+    
+    ¡Canta junto a esta versión de karaoke con letras sincronizadas!
+    
+    #karaoke #musica #{artist_tag} #cantarkaraoke
+  tags:
+    - karaoke
+    - musica
+    - letra
+    - cantar
+  privacy_status: "private"  # public, unlisted, private
+
+# Logging
+logging:
+  level: "INFO"  # DEBUG, INFO, WARNING, ERROR
+  file: "./logs/karaoke.log"

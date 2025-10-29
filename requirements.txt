@@ -1,0 +1,40 @@
+# Core dependencies
+python-dotenv==1.0.0
+PyYAML==6.0.1
+
+# YouTube
+yt-dlp==2023.12.30
+google-api-python-client==2.108.0
+google-auth-oauthlib==1.1.0
+google-auth-httplib2==0.1.1
+
+# Audio processing
+pydub==0.25.1
+spleeter==2.4.0
+openai-whisper==20231117
+torch==2.1.1  # Para Whisper (CPU o GPU)
+torchaudio==2.1.1
+
+# Alternative: Demucs (más moderno que Spleeter, descomenta si prefieres)
+# demucs==4.0.1
+
+# Video generation
+ffmpeg-python==0.2.0
+
+# Database
+sqlalchemy==2.0.23
+
+# Utilities
+requests==2.31.0
+tqdm==4.66.1
+colorama==0.4.6
+
+# Logging
+loguru==0.7.2
+
+# Optional: Replicate API (si prefieres usar APIs en vez de local)
+# replicate==0.22.0
+
+# Development
+black==23.12.0
+pytest==7.4.3
