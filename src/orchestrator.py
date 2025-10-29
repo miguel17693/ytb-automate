@@ -22,12 +22,14 @@ class TrendingOrchestrator:
         load_dotenv()
         
         # Get API key from environment or config
-        self.api_key = os.getenv('YOUTUBE_API_KEY') or config['youtube'].get('api_key')
-        if not self.api_key:
-            raise ValueError("YouTube API key not found in .env or config.yaml")
+        api_key = os.getenv('YOUTUBE_API_KEY') or config['youtube'].get('api_key')
+        
+        if not api_key:
+            raise ValueError("YouTube API key is required. Please set YOUTUBE_API_KEY in your .env file")
         
         # Initialize YouTube API client
-        self.youtube = build('youtube', 'v3', developerKey=self.api_key)
+        self.youtube = build('youtube', 'v3', developerKey=api_key)
+        logger.info("YouTube API initialized")
         
         # Configuration
         self.region = config['youtube']['region']
