@@ -1,0 +1,22 @@
+2025-10-29 15:19:04 | INFO     | orchestrator:__init__ - YouTube API initialized
+2025-10-29 15:19:04 | INFO     | orchestrator:search_trending_songs - Searching for trending songs in region: ES
+2025-10-29 15:19:04 | INFO     | orchestrator:search_trending_songs - Found 10 trending songs
+2025-10-29 15:19:20 | WARNING  | youtube_uploader:_authenticate - OAuth credentials file not found: client_secrets.json
+YouTube upload will not work until you:
+1. Create OAuth credentials in Google Cloud Console
+2. Download client_secrets.json to project root
+2025-10-29 15:19:20 | INFO     | processor:__init__ - Loading Whisper model: base
+2025-10-29 15:19:22 | INFO     | processor:process_song - Processing song: ROSALÍA - Berghain (Official Video) feat. Björk & Yves Tumor - Rosalía
+2025-10-29 15:19:22 | INFO     | processor:_download_audio - Downloading audio: https://www.youtube.com/watch?v=htQBS2Ikz6c
+2025-10-29 15:19:31 | ERROR    | processor:_download_audio - Error downloading audio: [0;31mERROR:[0m unable to download video data: HTTP Error 403: Forbidden
+2025-10-29 15:23:19 | INFO     | orchestrator:__init__ - YouTube API initialized
+2025-10-29 15:23:19 | INFO     | orchestrator:search_trending_songs - Searching for trending songs in region: ES
+2025-10-29 15:23:20 | INFO     | orchestrator:search_trending_songs - Found 10 trending songs
+2025-10-29 15:23:22 | WARNING  | youtube_uploader:_authenticate - OAuth credentials file not found: client_secrets.json
+YouTube upload will not work until you:
+1. Create OAuth credentials in Google Cloud Console
+2. Download client_secrets.json to project root
+2025-10-29 15:23:22 | INFO     | processor:__init__ - Loading Whisper model: base
+2025-10-29 15:23:23 | INFO     | processor:process_song - Processing song: ROSALÍA - Berghain (Official Video) feat. Björk & Yves Tumor - Rosalía
+2025-10-29 15:23:23 | INFO     | processor:_download_audio - Downloading audio: https://www.youtube.com/watch?v=htQBS2Ikz6c
+2025-10-29 15:23:32 | ERROR    | processor:_download_audio - Error downloading audio: [0;31mERROR:[0m Postprocessing: ffprobe and ffmpeg not found. Please install or provide the path using --ffmpeg-location
